@@ -21,7 +21,7 @@
         <?php while($row = mysqli_fetch_assoc($results)): ?>
         <tr>
             <td><?= $row['brand'] ?></td>
-            <td><?= $row['name'] ?></td>
+            <td><a href="sneakers-details.php?id=<?=$row['sneaker_id']?>"><?=$row['name']?></a></td>
             <td><?= $row['price'] ?></td>
         </tr>
         <?php endwhile; ?>
