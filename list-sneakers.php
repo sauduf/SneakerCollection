@@ -23,6 +23,8 @@
             <td><?= $row['brand'] ?></td>
             <td><a href="sneakers-details.php?id=<?=$row['sneaker_id']?>"><?=$row['name']?></a></td>
             <td><?= $row['price'] ?></td>
+			<td><a href="edit-sneaker-form.php?id=<?= $row['sneaker_id'] ?>" class="btn btn-warning btn-sm">Edit</a></td>
+			<td><a href="delete-sneaker.php?id=<?= $row['sneaker_id'] ?>" class="btn btn-danger btn-sm">Delete</a></td>
         </tr>
         <?php endwhile; ?>
     </table>
