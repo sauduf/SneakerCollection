@@ -28,6 +28,7 @@ if (!$mysqli->query($sql)) {
     echo("<h4>SQL error description: " . $mysqli->error . "</h4>");
 }
 
+
 // Redirect back to list
 header("Location: list-sneakers.php");
 ?>
