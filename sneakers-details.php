@@ -21,5 +21,4 @@ $row = mysqli_fetch_assoc($rst);
 </p>
 
 <a href="delete-sneaker.php?id=<?= $row['sneaker_id'] ?>" style="color:red;">Delete Sneaker</a>
-
 <a href="list-sneakers.php">&lt;&lt; Back to list</a>
