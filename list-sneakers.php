@@ -28,6 +28,11 @@
         </tr>
         <?php endwhile; ?>
     </table>
+	
+	<form action="search-sneakers.php" method="post">
+        <input type="text" name="keywords" placeholder="Search">
+        <input type="submit" value="Go!">
+    </form>
 
 </body>
 </html>
