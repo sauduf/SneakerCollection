@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Sneakers</title>
+  </head>
+  <body>
+    <h1>My Sneakers (Twig Template)</h1>
+    {{ include('navigation.html') }}
+    <p>{{ num_rows }} record(s) were returned...</p>
+    <table border="1">
+	  {% for s in results %}
+	    <tr>
+		  <td>{{ s.brand }}</td>
+		  <td>{{ s.name }}</td>
+		  <td>{{ s.price }}</td>
+		  <td>{{ s.color }}</td>
+		  <td>{{ s.release_date }}</td>
+		  </tr>
+      {% endfor %}        
+    </table>        
+  </body>
+</html>
