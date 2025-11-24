@@ -1,3 +1,10 @@
+<?php
+session_start(); 
+$_SESSION['loggedin'] = true;
+if (!isset($_SESSION['loggedin'])) {
+    die("Access denied.");
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -17,6 +24,9 @@
       <h1>Add a Sneaker</h1>
 
       <form action="add-sneaker.php" method="post">
+	  
+	   <input type="text" name="website" style="display:none">
+	   
         <div class="mb-3">
           <label for="Brand" class="form-label">Brand</label>
           <input type="text" class="form-control" id="Brand" name="Brand" required>

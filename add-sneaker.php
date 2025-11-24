@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!empty($_POST['website'])) {
+    die("Spam detected.");
+}
+
 // Read values from the form
 $brand = $_POST['Brand'];
 $name = $_POST['SneakerName'];
@@ -17,7 +23,8 @@ $sql = "INSERT INTO sneakers (brand, name, release_date, price, shoecondition, c
 
 // Run SQL statement and report errors
 if (!$mysqli->query($sql)) {
-    echo("<h4>SQL error description: " . $mysqli->error . "</h4>");
+    echo("<h4>SQL error: " . htmlspecialchars($mysqli->error) . "</h4>");
+    exit;
 }
 
 // Redirect to list
