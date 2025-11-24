@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+// Honeypot spam protection
+if (!empty($_POST['website'])) {
+    die("Spam detected.");
+}
+
 // Read values from the form
 $sneaker_id = $_POST['sneaker_id'];
 $brand = $_POST['brand'];
@@ -8,6 +15,10 @@ $price = $_POST['price'];
 $condition = $_POST['shoecondition'];
 $color = $_POST['color'];
 $size = $_POST['size'];
+
+if (!$sneaker_id) {
+    die("Invalid sneaker ID.");
+}
 
 // Connect to database
 include("db.php");

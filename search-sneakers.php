@@ -21,6 +21,11 @@ $max_price = $_POST['max_price'] ?? '';
 // Start SQL
 $sql = "SELECT * FROM sneakers WHERE 1=1";
 
+if ($keywords !== '') {
+    $safe_k = mysqli_real_escape_string($mysqli, $keywords);
+    $sql .= " AND name LIKE '%{$safe_k}%'";
+}
+
 // Add filters only if the user typed something
 if ($keywords !== '') {
     $sql .= " AND name LIKE '%$keywords%'";
@@ -47,7 +52,7 @@ $results = mysqli_query($mysqli, $sql);
 
 <?php while ($row = mysqli_fetch_assoc($results)): ?>
     <tr>
-        <td><?= $row['brand'] ?></td>
+        <td><?= htmlspecialchars($row['brand']) ?></td>
 
         <td>
             <a href="sneakers-details.php?id=<?= $row['sneaker_id'] ?>">

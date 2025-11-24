@@ -1,16 +1,22 @@
 <?php
+session_start();
+
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+if (!$id) {
+    die("Invalid sneaker ID.");
+}
+
 // Connect to database
 include("db.php");
-
-// Get sneaker ID from URL
-$id = $_GET['id'];
 
 // Build SQL delete statement
 $sql = "DELETE FROM sneakers WHERE sneaker_id = {$id}";
 
 // Run delete and report errors
 if (!$mysqli->query($sql)) {
-    echo("<h4>SQL error: " . $mysqli->error . "</h4>");
+    echo "<h4>SQL error: " . htmlspecialchars($mysqli->error) . "</h4>";
+    exit;
 }
 
 // Redirect back to list

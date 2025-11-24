@@ -3,7 +3,13 @@
 include("db.php");
 
 // Grab id value from URL
-$id = $_GET['id'];
+$id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
+
+// If page is invalid stop the page
+if ($id === false) {
+    echo "<h2>Invalid sneaker ID.</h2>";
+    exit;
+}
 
 $sql = "SELECT * FROM sneakers WHERE sneaker_id = {$id}";
 $rst = mysqli_query($mysqli, $sql);
@@ -20,5 +26,5 @@ $row = mysqli_fetch_assoc($rst);
     <strong>Size:</strong> <?= $row['size'] ?>
 </p>
 
-<a href="delete-sneaker.php?id=<?= $row['sneaker_id'] ?>" style="color:red;">Delete Sneaker</a>
+<a href="delete-sneaker.php?id=<?= htmlspecialchars($row['sneaker_id']) ?>" style="color:red;">
 <a href="list-sneakers.php">&lt;&lt; Back to list</a>
