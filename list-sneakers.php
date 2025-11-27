@@ -14,6 +14,7 @@ $_SESSION['loggedin'] = true;
 <h1>Welcome to my Sneakers Collection</h1>
 
 <a href="add-sneaker-form.php" class="btn btn-primary mb-3">Add a Sneaker</a>
+<a href="sneakers.php" class="btn btn-primary mb-3">Twig Template</a>
 
 <!-- ==========================
      AJAX LIVE SEARCH (OPTION A)
@@ -63,6 +64,14 @@ $_SESSION['loggedin'] = true;
      TABLE OF SNEAKERS
 =========================== -->
 <table class="table table-striped table-hover" id="sneakerTable">
+
+	<tr>
+        <th>Brand</th>
+        <th>Name</th>
+        <th>Price($)</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
 
     <?php
     include("db.php");
