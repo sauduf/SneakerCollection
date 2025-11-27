@@ -1,20 +1,16 @@
 <?php
 session_start();
-
-// Honeypot spam protection
-if (!empty($_POST['website'])) {
-    die("Spam detected.");
-}
+$_SESSION['loggedin'] = true; 
 
 // Read values from the form
-$sneaker_id = $_POST['sneaker_id'];
-$brand = $_POST['brand'];
-$name = $_POST['name'];
-$release_date = $_POST['release_date'];
-$price = $_POST['price'];
-$condition = $_POST['shoecondition'];
-$color = $_POST['color'];
-$size = $_POST['size'];
+$sneaker_id   = filter_input(INPUT_POST, 'sneaker_id', FILTER_VALIDATE_INT);
+$brand = htmlspecialchars($_POST['brand']);
+$name = htmlspecialchars($_POST['name']);
+$release_date = htmlspecialchars($_POST['release_date']);
+$price = htmlspecialchars($_POST['price']);
+$condition = htmlspecialchars($_POST['shoecondition']);
+$color = htmlspecialchars($_POST['color']);
+$size = htmlspecialchars($_POST['size']);
 
 if (!$sneaker_id) {
     die("Invalid sneaker ID.");

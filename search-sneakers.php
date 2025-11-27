@@ -11,41 +11,39 @@
 <?php
 include("db.php");
 
-// Read values safely (avoid warnings)
-$keywords  = $_POST['keywords']  ?? '';
-$brand     = $_POST['brand']     ?? '';
-$color     = $_POST['color']     ?? '';
-$max_price = $_POST['max_price'] ?? '';
-
+// Read and filter inputs (lecture method)
+$keywords  = filter_input(INPUT_POST, "keywords", FILTER_SANITIZE_SPECIAL_CHARS);
+$brand     = filter_input(INPUT_POST, "brand", FILTER_SANITIZE_SPECIAL_CHARS);
+$color     = filter_input(INPUT_POST, "color", FILTER_SANITIZE_SPECIAL_CHARS);
+$max_price = filter_input(INPUT_POST, "max_price", FILTER_VALIDATE_FLOAT);
 
 // Start SQL
 $sql = "SELECT * FROM sneakers WHERE 1=1";
 
-if ($keywords !== '') {
-    $safe_k = mysqli_real_escape_string($mysqli, $keywords);
-    $sql .= " AND name LIKE '%{$safe_k}%'";
+if ($keywords) {
+    $sql .= " AND name LIKE '%{$keywords}%'";
 }
 
-// Add filters only if the user typed something
-if ($keywords !== '') {
-    $sql .= " AND name LIKE '%$keywords%'";
+if ($brand) {
+    $sql .= " AND brand LIKE '%{$brand}%'";
 }
 
-if ($brand !== '') {
-    $sql .= " AND brand LIKE '%$brand%'";
+if ($color) {
+    $sql .= " AND color LIKE '%{$color}%'";
 }
 
-if ($color !== '') {
-    $sql .= " AND color LIKE '%$color%'";
-}
-
-if ($max_price !== '') {
-    $sql .= " AND price <= $max_price";
+if ($max_price !== false && $max_price !== null && $max_price !== '') {
+    $sql .= " AND price <= {$max_price}";
 }
 
 $sql .= " ORDER BY release_date";
 
+// Run query
 $results = mysqli_query($mysqli, $sql);
+
+if (!$results) {
+    die("SQL ERROR: " . $mysqli->error);
+}
 ?>
 
 <table class="table table-striped table-hover">

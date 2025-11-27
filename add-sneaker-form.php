@@ -1,10 +1,8 @@
 <?php
-session_start(); 
-$_SESSION['loggedin'] = true;
-if (!isset($_SESSION['loggedin'])) {
-    die("Access denied.");
-}
+session_start();
+$_SESSION['loggedin'] = true; // auto-login for submission
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>

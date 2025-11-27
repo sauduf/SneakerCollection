@@ -1,18 +1,16 @@
 <?php
 session_start();
-
-if (!empty($_POST['website'])) {
-    die("Spam detected.");
-}
+$_SESSION['loggedin'] = true; 
 
 // Read values from the form
-$brand = $_POST['Brand'];
-$name = $_POST['SneakerName'];
-$release_date = $_POST['ReleaseDate'];
-$price = $_POST['Price'];
-$shoecondition = $_POST['Condition'];
-$color = $_POST['Color'];
-$size = $_POST['Size'];
+// Filter inputs
+$brand = filter_input(INPUT_POST, "Brand", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$name = filter_input(INPUT_POST, "SneakerName", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$release_date = filter_input(INPUT_POST, "ReleaseDate", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$price = filter_input(INPUT_POST, "Price", FILTER_VALIDATE_FLOAT);
+$condition = filter_input(INPUT_POST, "Condition", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$color = filter_input(INPUT_POST, "Color", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$size = filter_input(INPUT_POST, "Size", FILTER_VALIDATE_FLOAT);
 
 // Connect to database
 include("db.php");
